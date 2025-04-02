@@ -57,7 +57,7 @@ func main() {
 		})
 	})
 
-	// Start the server
+	// Start server
 	fmt.Println("Server listening on port 8080 (http://localhost:8080)")
 	http.ListenAndServe(":8080", r)
 

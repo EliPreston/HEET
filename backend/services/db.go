@@ -9,13 +9,18 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-// docker run --rm --name docker_container_img_name --env POSTGRES_PASSWORD=password --env POSTGRES_DB=heet --volume pg-data:/var/lib/postgresql/data --publish 5432:5432 postgres:bookworm
-// docker exec -it docker_container_img_name psql -U postgres
-
-var dbURL = "postgres://postgres:admin@localhost:5432/gotodo"
-var conn, err = pgx.Connect(context.Background(), dbURL)
+var dbHost = os.Getenv("DB_HOST")
+var dbPort = os.Getenv("DB_PORT")
+var dbUser = os.Getenv("DB_USER")
+var dbPassword = os.Getenv("DB_PASSWORD")
+var dbName = os.Getenv("DB_NAME")
+var connStr = fmt.Sprintf("postgres://%s:%s@%s:%s/%s", dbUser, dbPassword, dbHost, dbPort, dbName)
 
 func ConnectToDB() {
+
+	fmt.Println(connStr)
+
+	var conn, err = pgx.Connect(context.Background(), connStr)
 
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
