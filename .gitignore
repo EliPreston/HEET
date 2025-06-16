@@ -24,10 +24,6 @@
 # Go workspace file
 go.work
 
-# Go mod and sum
-*.mod
-*.sum
-
 ### macOS ###
 # General
 .DS_Store
