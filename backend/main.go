@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	// For Postgres connection
+	"backend/handlers"
 	"backend/services"
 
 	// For routing requests
@@ -41,6 +42,20 @@ func main() {
 		r.Post("/", func(w http.ResponseWriter, r *http.Request) { // r.Post("/", CreateAppliance)
 			w.Write([]byte("POST on 'appliances' path: /appliances"))
 		})
+
+		// Handle /appliances/dehumidifiers route
+		r.Get("/dehumidifiers", handlers.ListDehumidifiers)
+		// Nested route for single dehumidifier by ID
+		// r.Route("/dehumidifiers/{id}", func(r chi.Router) {
+		// 	r.Get("/", handlers.GetDehumidifierByID)
+		// })
+
+		// Handle /appliances/residentialclothesdryers route
+		r.Get("/residentialclothesdryers", handlers.ListResidentialClothesDryers)
+		// Nested route for single residential clothes dryer by ID
+		// r.Route("/residentialclothesdryers/{id}", func(r chi.Router) {
+		// 	r.Get("/", handlers.GetResidentialClothesDryerByID)
+		// })
 
 		// Handle /appliances/{id} route
 		r.Route("/{id}", func(r chi.Router) {
