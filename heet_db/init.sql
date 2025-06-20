@@ -93,7 +93,7 @@ CSV HEADER;
 -- ENERGY STAR Unique ID,Brand Name,Model Number,Additional Model Information,UPC,Type,Width (inches),Depth (inches),Capacity - Maximum Number of Place Settings,Soil-Sensing Capability,Tub Material,Drying Method,Additional Product Features,Annual Energy Use (kWh/yr),US Federal Standard (kWh/yr),% Better than US Federal Standard (kWh/yr),Water Use (gallons/cycle),US Federal Standard (gallons/cycle),% Better than US Federal Standard (gallons/cycle),Connected Capable,Connects Using,Communication Hardware Architecture,DR Protocol,Direct on-premises Open-standard Based Interconnection,Date Available On Market, Date Certified,Markets,CB Model Identifier,Meets ENERGY STAR Most Efficient 2025 Criteria
 
 CREATE TABLE residential_dishwashers (
-    energy_star_unique_id TEXT PRIMARY KEY,
+    energy_star_unique_id NUMERIC PRIMARY KEY,
     brand_name TEXT,
     model_number TEXT,
     additional_model_information TEXT,
