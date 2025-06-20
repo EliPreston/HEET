@@ -52,8 +52,22 @@ func main() {
 
 		// Handle /appliances/residentialclothesdryers route
 		r.Get("/residentialclothesdryers", handlers.ListResidentialClothesDryers)
+		// Nested route for single residentialclothesdryers by ID
+		// r.Route("/residentialclothesdryers/{id}", func(r chi.Router) {
+		// 	r.Get("/", handlers.GetApplianceByID)
+		// })
+
+		// Handle /appliances/residentialdishwashers route
+		r.Get("/residentialdishwashers", handlers.ListResdientialDishwashers)
 		// Nested route for single appliance by ID
-		// r.Route("/appliance/{id}", func(r chi.Router) {
+		// r.Route("/residentialdishwashers/{id}", func(r chi.Router) {
+		// 	r.Get("/", handlers.GetApplianceByID)
+		// })
+
+		// Handle /appliances/clotheswasherdryercombos route
+		r.Get("/clotheswasherdryercombos", handlers.ListWasherDryerCombos)
+		// Nested route for single clotheswasherdryercombo by ID
+		// r.Route("/clotheswasherdryercombos/{id}", func(r chi.Router) {
 		// 	r.Get("/", handlers.GetApplianceByID)
 		// })
 
