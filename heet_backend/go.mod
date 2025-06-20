@@ -1,4 +1,4 @@
-module backend
+module github.com/EliPreston/heet_backend
 
 go 1.24.1
 

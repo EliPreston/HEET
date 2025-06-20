@@ -1,0 +1,64 @@
+# Builder image
+FROM golang:1.24 AS builder
+
+# Set the CWD inside container
+WORKDIR /app
+
+# Copy go mod,sum files
+COPY go.mod go.sum ./
+
+# Download dependencies
+RUN go mod download
+
+# Copy source code
+COPY . .
+
+# Tidy up to ensure up-to-date go.sum
+RUN go mod tidy
+
+# Build app
+RUN go build -o main .
+
+# ----------- FINAL IMAGE STAGE -------------
+# Minimal/small base image
+FROM debian:bookworm-slim
+
+WORKDIR /root/
+
+# Copy binary
+COPY --from=builder /app/main .
+
+# Expose port the app listens on
+EXPOSE 8080
+
+# Run app/binary
+CMD ["./main"]
+
+
+
+
+# # Specifies a parent image
+# FROM golang:1.24
+
+
+# # Creates an app directory to hold your app’s source code
+# WORKDIR /app
+
+# COPY go.mod go.sum ./
+
+# # Installs Go dependencies
+# RUN go mod download
+
+# # Copies everything from your root directory into /app
+# COPY . .
+
+# RUN go mod tidy
+ 
+# # Builds your app with optional configuration
+# RUN go build -o main .
+ 
+# # Tells Docker which network port your container listens on
+# EXPOSE 8080
+
+# # Specifies the executable command that runs when the container starts
+# CMD ["./main"]

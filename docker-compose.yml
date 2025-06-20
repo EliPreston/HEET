@@ -1,7 +1,7 @@
 
 services:
   db:
-    build: ./db
+    build: ./heet_db
     container_name: postgres_container
     restart: always
     environment:
@@ -14,7 +14,7 @@ services:
       # - ./db/pg-data:/var/lib/postgresql/data # locally store pg db
       - pg-data:/var/lib/postgresql/data  # store pg data in docker container (still persistant, but only accessible when container is running)
       # - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql  # Mount init.sql
-      - ./db:/docker-entrypoint-initdb.d # Mount folder containing starter data + init.sql
+      - ./heet_db:/docker-entrypoint-initdb.d # Mount folder containing starter data + init.sql
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
       interval: 10s
@@ -42,7 +42,7 @@ services:
 
   
   api:
-    build: ./backend
+    build: ./heet_backend
     container_name: go_api_server_container
     depends_on:
       db:
@@ -60,7 +60,7 @@ services:
     
   # Not using/implemented yet
   # web:
-  #   build: ./frontend
+  #   build: ./heet_frontend
   #   ports:
   #     - 3000:3000   # Map port 3000 of host to port 3000 of container
       

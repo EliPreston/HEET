@@ -4,7 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"backend/services" // where your DB connection lives
+	// where DB connection lives
+	"github.com/EliPreston/heet_backend/internal/services"
 
 	"github.com/go-chi/render"
 )

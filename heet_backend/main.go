@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	// For Postgres connection
-	"backend/handlers"
-	"backend/services"
+	"github.com/EliPreston/heet_backend/internal/db"
+	"github.com/EliPreston/heet_backend/internal/handlers"
 
 	// For routing requests
 	"github.com/go-chi/chi/v5"
@@ -17,7 +17,7 @@ import (
 func main() {
 
 	// Connect to Postgres DB, app will exit if no connection can be made
-	services.ConnectToDB()
+	db.ConnectToDB()
 
 	r := chi.NewRouter()
 
@@ -52,9 +52,18 @@ func main() {
 
 		// Handle /appliances/residentialclothesdryers route
 		r.Get("/residentialclothesdryers", handlers.ListResidentialClothesDryers)
-		// Nested route for single residential clothes dryer by ID
-		// r.Route("/residentialclothesdryers/{id}", func(r chi.Router) {
-		// 	r.Get("/", handlers.GetResidentialClothesDryerByID)
+		// Nested route for single appliance by ID
+		// r.Route("/appliance/{id}", func(r chi.Router) {
+		// 	r.Get("/", handlers.GetApplianceByID)
+		// })
+
+		// Handle /appliances/categtoryofappliances route
+		r.Get("/categtoryofappliances", func(w http.ResponseWriter, r *http.Request) { // r.Get("/", ListAppliances)
+			w.Write([]byte("GET on 'categtoryofappliances' path: /appliances/categtoryofappliances"))
+		})
+		// Nested route for single appliance by ID
+		// r.Route("/appliance/{id}", func(r chi.Router) {
+		// 	r.Get("/", handlers.GetApplianceByID)
 		// })
 
 		// Handle /appliances/{id} route
