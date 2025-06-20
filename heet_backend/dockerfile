@@ -17,7 +17,7 @@ COPY . .
 RUN go mod tidy
 
 # Build app
-RUN go build -o main .
+RUN go build -o main ./cmd/api
 
 # ----------- FINAL IMAGE STAGE -------------
 # Minimal/small base image
