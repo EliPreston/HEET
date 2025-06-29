@@ -45,6 +45,9 @@ func main() {
 
 		// Handle /appliances/dehumidifiers route
 		r.Get("/dehumidifiers", handlers.ListDehumidifiers)
+		r.Route("/dehumidifiers/{dehumidifier_id}", func(r chi.Router) {
+			r.Get("/", handlers.GetDehumidifier)
+		})
 		// Nested route for single dehumidifier by ID
 		// r.Route("/dehumidifiers/{id}", func(r chi.Router) {
 		// 	r.Get("/", handlers.GetDehumidifierByID)
@@ -68,6 +71,13 @@ func main() {
 		r.Get("/clotheswasherdryercombos", handlers.ListWasherDryerCombos)
 		// Nested route for single clotheswasherdryercombo by ID
 		// r.Route("/clotheswasherdryercombos/{id}", func(r chi.Router) {
+		// 	r.Get("/", handlers.GetApplianceByID)
+		// })
+
+		// Handle /appliances/residentialclotheswashers route
+		r.Get("/residentialclotheswashers", handlers.ListResdientialClothesWashers)
+		// Nested route for single appliance by ID
+		// r.Route("/residentialclotheswasher/{id}", func(r chi.Router) {
 		// 	r.Get("/", handlers.GetApplianceByID)
 		// })
 

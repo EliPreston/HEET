@@ -44,3 +44,21 @@ func GetDehumidifiers() ([]models.Dehumidifier, error) {
 
 	return dehumidifiers, nil
 }
+
+func GetDehumidifierByID(id float64) (*models.Dehumidifier, error) {
+
+	sql := `
+       SELECT energy_star_unique_id, brand_name, model_name, model_number FROM dehumidifiers
+	   WHERE energy_star_unique_id = $1
+    `
+
+	row := db.Pool.QueryRow(db.Ctx, sql, id)
+	var dehumidifier models.Dehumidifier
+	err := row.Scan(&dehumidifier.EnergyStarUniqueID, &dehumidifier.BrandName, &dehumidifier.ModelName, &dehumidifier.ModelNumber)
+
+	if err != nil {
+		return nil, fmt.Errorf("query failed: %w", err)
+	}
+
+	return &dehumidifier, nil
+}
