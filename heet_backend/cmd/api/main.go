@@ -72,10 +72,6 @@ func main() {
 		r.Route("/residentialclotheswashers/{residentialclotheswasher_id}", func(r chi.Router) {
 			r.Get("/", handlers.GetResidentialClothesWasher)
 		})
-		// Nested route for single appliance by ID
-		// r.Route("/residentialclotheswasher/{id}", func(r chi.Router) {
-		// 	r.Get("/", handlers.GetApplianceByID)
-		// })
 
 		//------------------------------------------
 		//------------------------------------------
