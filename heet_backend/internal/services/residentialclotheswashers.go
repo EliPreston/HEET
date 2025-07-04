@@ -43,3 +43,21 @@ func GetResidentialClothesWashers() ([]models.ResidentialClothesWasher, error) {
 
 	return residentialClothesWashers, nil
 }
+
+func GetResidentialClothesWasherByID(id float64) (*models.ResidentialClothesWasher, error) {
+
+	sql := `
+       SELECT energy_star_unique_id, brand_name, model_number FROM residential_clothes_washers
+	   WHERE energy_star_unique_id = $1
+    `
+
+	row := db.Pool.QueryRow(db.Ctx, sql, id)
+	var clotheswasher models.ResidentialClothesWasher
+	err := row.Scan(&clotheswasher.EnergyStarUniqueID, &clotheswasher.BrandName, &clotheswasher.ModelNumber)
+
+	if err != nil {
+		return nil, fmt.Errorf("query failed: %w", err)
+	}
+
+	return &clotheswasher, nil
+}

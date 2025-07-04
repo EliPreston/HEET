@@ -43,66 +43,64 @@ func main() {
 			w.Write([]byte("POST on 'appliances' path: /appliances"))
 		})
 
-		// Handle /appliances/dehumidifiers route
+		// Handle dehumidifiers routes
 		r.Get("/dehumidifiers", handlers.ListDehumidifiers)
 		r.Route("/dehumidifiers/{dehumidifier_id}", func(r chi.Router) {
 			r.Get("/", handlers.GetDehumidifier)
 		})
-		// Nested route for single dehumidifier by ID
-		// r.Route("/dehumidifiers/{id}", func(r chi.Router) {
-		// 	r.Get("/", handlers.GetDehumidifierByID)
-		// })
 
-		// Handle /appliances/residentialclothesdryers route
+		// Handle residential clothes dryers routes
 		r.Get("/residentialclothesdryers", handlers.ListResidentialClothesDryers)
-		// Nested route for single residentialclothesdryers by ID
-		// r.Route("/residentialclothesdryers/{id}", func(r chi.Router) {
-		// 	r.Get("/", handlers.GetApplianceByID)
-		// })
+		r.Route("/residentialclothesdryers/{residentialclothesdryer_id}", func(r chi.Router) {
+			r.Get("/", handlers.GetResidentialClothesDryer)
+		})
 
-		// Handle /appliances/residentialdishwashers route
+		// Handle dishwashers routes
 		r.Get("/residentialdishwashers", handlers.ListResdientialDishwashers)
-		// Nested route for single appliance by ID
-		// r.Route("/residentialdishwashers/{id}", func(r chi.Router) {
-		// 	r.Get("/", handlers.GetApplianceByID)
-		// })
+		r.Route("/residentialdishwashers/{residentialdishwasher_id}", func(r chi.Router) {
+			r.Get("/", handlers.GetResidentialDishwasher)
+		})
 
-		// Handle /appliances/clotheswasherdryercombos route
+		// Handle clothes washer-dryer combos routes
 		r.Get("/clotheswasherdryercombos", handlers.ListWasherDryerCombos)
-		// Nested route for single clotheswasherdryercombo by ID
-		// r.Route("/clotheswasherdryercombos/{id}", func(r chi.Router) {
-		// 	r.Get("/", handlers.GetApplianceByID)
-		// })
+		r.Route("/clotheswasherdryercombos/{clotheswasherdryercombo_id}", func(r chi.Router) {
+			r.Get("/", handlers.GetClothesWasherDryerCombo)
+		})
 
-		// Handle /appliances/residentialclotheswashers route
+		// Handle residential clothes washers routes
 		r.Get("/residentialclotheswashers", handlers.ListResdientialClothesWashers)
+		r.Route("/residentialclotheswashers/{residentialclotheswasher_id}", func(r chi.Router) {
+			r.Get("/", handlers.GetResidentialClothesWasher)
+		})
 		// Nested route for single appliance by ID
 		// r.Route("/residentialclotheswasher/{id}", func(r chi.Router) {
 		// 	r.Get("/", handlers.GetApplianceByID)
 		// })
 
-		// Handle /appliances/categtoryofappliances route
-		r.Get("/categtoryofappliances", func(w http.ResponseWriter, r *http.Request) { // r.Get("/", ListAppliances)
-			w.Write([]byte("GET on 'categtoryofappliances' path: /appliances/categtoryofappliances"))
-		})
-		// Nested route for single appliance by ID
-		// r.Route("/appliance/{id}", func(r chi.Router) {
-		// 	r.Get("/", handlers.GetApplianceByID)
+		//------------------------------------------
+		//------------------------------------------
+		//------------------------------------------
+		// // Handle /appliances/categtoryofappliances route
+		// r.Get("/categtoryofappliances", func(w http.ResponseWriter, r *http.Request) { // r.Get("/", ListAppliances)
+		// 	w.Write([]byte("GET on 'categtoryofappliances' path: /appliances/categtoryofappliances"))
 		// })
+		// // Nested route for single appliance by ID
+		// // r.Route("/appliance/{id}", func(r chi.Router) {
+		// // 	r.Get("/", handlers.GetApplianceByID)
+		// // })
+		// // Handle /appliances/{id} route
+		// r.Route("/{id}", func(r chi.Router) {
 
-		// Handle /appliances/{id} route
-		r.Route("/{id}", func(r chi.Router) {
-
-			r.Get("/", func(w http.ResponseWriter, r *http.Request) { // r.Post("/", GetAppliance)
-				w.Write([]byte("GET on 'appliances/{id}' path: /appliances/{id}"))
-			})
-			r.Put("/", func(w http.ResponseWriter, r *http.Request) { // r.Put("/", UpdateAppliance)
-				w.Write([]byte("PUT on 'appliances/{id}' path: /appliances/{id}"))
-			})
-			r.Delete("/", func(w http.ResponseWriter, r *http.Request) { // r.Delete("/", DeleteAppliance)
-				w.Write([]byte("DELETE on 'appliances/{id}' path: /appliances/{id}"))
-			})
-		})
+		// 	r.Get("/", func(w http.ResponseWriter, r *http.Request) { // r.Post("/", GetAppliance)
+		// 		w.Write([]byte("GET on 'appliances/{id}' path: /appliances/{id}"))
+		// 	})
+		// 	r.Put("/", func(w http.ResponseWriter, r *http.Request) { // r.Put("/", UpdateAppliance)
+		// 		w.Write([]byte("PUT on 'appliances/{id}' path: /appliances/{id}"))
+		// 	})
+		// 	r.Delete("/", func(w http.ResponseWriter, r *http.Request) { // r.Delete("/", DeleteAppliance)
+		// 		w.Write([]byte("DELETE on 'appliances/{id}' path: /appliances/{id}"))
+		// 	})
+		// })
 	})
 
 	// Start server

@@ -45,3 +45,21 @@ func GetResidentialDishwashers() ([]models.ResidentialDishwasher, error) {
 
 	return residentialDishwashers, nil
 }
+
+func GetDishwasherByID(id float64) (*models.ResidentialDishwasher, error) {
+
+	sql := `
+       SELECT energy_star_unique_id, brand_name, model_number FROM residential_dishwashers
+	   WHERE energy_star_unique_id = $1
+    `
+
+	row := db.Pool.QueryRow(db.Ctx, sql, id)
+	var dishwasher models.ResidentialDishwasher
+	err := row.Scan(&dishwasher.EnergyStarUniqueID, &dishwasher.BrandName, &dishwasher.ModelNumber)
+
+	if err != nil {
+		return nil, fmt.Errorf("query failed: %w", err)
+	}
+
+	return &dishwasher, nil
+}
